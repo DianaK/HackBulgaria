@@ -1,0 +1,5 @@
+C:\Users\Diana\Documents\Visual Studio 2013\Projects\Js\CsvQueries\bin\Debug\CsvQueries.exe.config
+C:\Users\Diana\Documents\Visual Studio 2013\Projects\Js\CsvQueries\bin\Debug\CsvQueries.exe
+C:\Users\Diana\Documents\Visual Studio 2013\Projects\Js\CsvQueries\bin\Debug\CsvQueries.pdb
+C:\Users\Diana\Documents\Visual Studio 2013\Projects\Js\CsvQueries\obj\Debug\CsvQueries.exe
+C:\Users\Diana\Documents\Visual Studio 2013\Projects\Js\CsvQueries\obj\Debug\CsvQueries.pdb
