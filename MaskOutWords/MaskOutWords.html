@@ -1,39 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title></title>
+    <title>Mask Words</title>
 </head>
 <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
-    <script type="text/javascript">
-        function maskText() {
-            var words = ["yesterday", "Dog", "food", "walk"];
-            var text = $("#txtInput").val();
-            var maskedText = maskOutWords(words, text);
-            $("#lblResult").html(maskedText);
-        }
-
-        function maskOutWords(words, text) {
-            for (var index in words) {
-                var word = words[index].toLowerCase();
-				var startIndex =  text.toLowerCase().indexOf(word);
-                while (startIndex > -1) { 
-                    var lenght = word.length;
-                    var endIndex = startIndex + lenght;
-                    var astericsStr = "";
-                    for (var i = 0; i < lenght; i++) {
-                        astericsStr += "*";
-                    }
-                    var newText = text.substring(0, startIndex) + astericsStr + text.substring(endIndex);
-                    text = newText;
-					startIndex =  text.toLowerCase().indexOf(word); // in case we have the word more than once
-                }
-            }
-            return text;
-        }
-    </script>
-    
+    <script src="maskWords.js"></script>
 		<div><textarea id="txtInput" cols="50" rows="4" placeholder="Text"></textarea></div>
 		<div><input type="button" id="btnMask" value="Show Masked Text" onclick="maskText();"/></div>
 		<label id="lblResult"></label>
