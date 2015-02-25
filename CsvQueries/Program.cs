@@ -43,13 +43,6 @@ namespace CsvQueries
                     }
                 } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
 
-            //Console.Write(queryExecutor.Select(new List<string>() {"id", "name"}, 5));
-            //Console.WriteLine();
-            //Console.Write(queryExecutor.Sum("id"));
-            //Console.WriteLine();
-            //Console.Write(queryExecutor.Show());
-            //Console.WriteLine();
-            //Console.Write(queryExecutor.Find("-"));
         }
 
         public static bool ExecuteQuery(string query, int choice, QueryExecutor queryExecutor)
