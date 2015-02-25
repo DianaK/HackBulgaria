@@ -9,20 +9,20 @@ namespace CsvQueries
     public class QueryExecutor
     {
         private readonly Dictionary<int, IDictionary<string, string>> csvFileHash;
-        private readonly List<string> columnNames;
+        public List<string> ColumnNames { private set; get; }
 
         public QueryExecutor(Dictionary<int, IDictionary<string, string>> csvFileHash, List<string> columnNames)
         {
             this.csvFileHash = csvFileHash;
-            this.columnNames = columnNames;
+            this.ColumnNames = columnNames;
         }
 
         public string Select(List<string> columns, int limit = Int32.MaxValue)
         {
             StringBuilder strBuilder = new StringBuilder();
-            foreach (var columnNumber in csvFileHash.Keys.Where(p=>p < limit))
+            foreach (var rowNumber in csvFileHash.Keys.Where(p=>p <= limit))
             {
-                var currentRow = csvFileHash[columnNumber];
+                var currentRow = csvFileHash[rowNumber];
                 foreach (var columnName in columns)
                 {
                     strBuilder.AppendFormat("{0}|", currentRow[columnName]);
@@ -34,14 +34,20 @@ namespace CsvQueries
 
         public string Sum(string column)
         {
-            int sum = csvFileHash.Keys.Sum(columnNumber => Convert.ToInt32(csvFileHash[columnNumber][column]));
+            int sum = 0;
+            foreach (var rowNumber in csvFileHash.Keys)
+            {
+                int value = 0;
+                Int32.TryParse(csvFileHash[rowNumber][column], out value);
+                sum += value;
+            }
             return sum.ToString();
         }
 
         public string Show()
         {
             StringBuilder strBuilder = new StringBuilder();
-            foreach (var columnName in columnNames)
+            foreach (var columnName in ColumnNames)
             {
                 strBuilder.AppendFormat("{0},", columnName);
             }
@@ -51,9 +57,9 @@ namespace CsvQueries
         public string Find(string x)
         {
             StringBuilder strBuilder = new StringBuilder();
-            foreach (var columnNumber in csvFileHash.Keys)
+            foreach (var rowNumber in csvFileHash.Keys)
             {
-                var currentRow = csvFileHash[columnNumber];
+                var currentRow = csvFileHash[rowNumber];
                 foreach (var columnValue in currentRow.Values)
                 {
                     if (columnValue.Contains(x))
@@ -66,6 +72,10 @@ namespace CsvQueries
                         break;
                     }
                 }
+            }
+            if (strBuilder.Length == 0)
+            {
+                strBuilder.Append("No result found");
             }
             return strBuilder.ToString();
         }
